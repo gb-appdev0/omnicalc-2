@@ -15,4 +15,10 @@ Rails.application.routes.draw do
   get("/divide", { :controller => "application", :action => "divide_form"})
   get("/wizard_divide", { :controller => "application", :action => "divide_results"})
 
+  get("/muggle_translate", { :controller => "application", :action => "translate_form"})
+  get("/wizard_translate", { :controller => "application", :action => "translate_results"})
+
+  get("/street_to_coords/new", { :controller => "application", :action => "street_coords_form"})
+  get("/street_to_coords/results", { :controller => "application", :action => "street_coords_results"})
+
 end

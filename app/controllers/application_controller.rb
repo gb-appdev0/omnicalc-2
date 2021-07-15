@@ -43,4 +43,20 @@ class ApplicationController < ActionController::Base
     @sum = @first / @second
     render({ :template => "divide_templates/divide_results.html.erb"})
   end
+
+  def translate_form
+    render({ :template => "map_templates/translate_input.html.erb"})
+  end
+
+  def translate_results
+    render({ :template => "map_templates/translate_results.html.erb"})
+  end
+
+  def street_coords_form
+    render({ :template => "map_templates/street_coords_form.html.erb"})
+  end
+
+  def street_coords_results
+
+  end
 end
