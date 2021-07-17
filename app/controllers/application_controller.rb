@@ -45,10 +45,20 @@ class ApplicationController < ActionController::Base
   end
 
   def translate_form
+    require "google/cloud/translate"
+    @gt_client = Google::Cloud::Translate.new({ :version => :v2 })
+    #@translation = gt_client.translate("Hello, world!", { :to => "es" })
+    @languages = gt_client.languages("en")
+    @size = languages.size #=> 104
+
     render({ :template => "map_templates/translate_input.html.erb"})
   end
 
   def translate_results
+    require "google/cloud/translate"
+    @gt_client = Google::Cloud::Translate.new({ :version => :v2 })
+    #@translation = gt_client.translate("Hello, world!", { :to => "es" })
+
     render({ :template => "map_templates/translate_results.html.erb"})
   end
 
