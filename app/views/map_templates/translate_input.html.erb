@@ -6,7 +6,7 @@
 
   <select name="lang">
     <% @size.times do |i| %>
-      <option value=<% @languages[i].code %>><%= @languages[i].name %></option>
+      <option value=<%= @languages[i].code %>><%= @languages[i].name %></option>
     <% end %>%
   </select>
 
