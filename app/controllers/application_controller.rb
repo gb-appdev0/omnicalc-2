@@ -79,6 +79,42 @@ class ApplicationController < ActionController::Base
   end
 
   def street_coords_results
+    @address = params.fetch("user_street_address")
+    url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + @address + "&key=" + ENV.fetch("GMAPS_KEY")
+    raw_data = open(url).read
+    parsed_data = JSON.parse(raw_data)
+    results = parsed_data.fetch("results")[0]
+    geometry = results.fetch("geometry")
+    location = geometry.fetch("location")
+    @lat = location.fetch("lat")
+    @lng = location.fetch("lng")
 
+    render({ :template => "map_templates/street_coords_results.html.erb"})
   end
+
+  def coords_weather_form
+    render({ :template => "map_templates/coords_weather_form.html.erb"})
+  end
+
+  def coords_weather_results
+    @lat = params.fetch("user_latitude")
+    @lng = params.fetch("user_longitude")
+
+    url = "https://api.darksky.net/forecast/" + ENV.fetch("DARK_SKY_KEY") + "/" + @lat + "," + @lng
+    raw_data = open(url).read
+    parsed_data = JSON.parse(raw_data)
+    @curr_temp = parsed_data.dig("currently", "temperature")
+    @curr_summ = parsed_data.dig("currently", "summary")
+    @hour = parsed_data.dig("hourly", "data", 0, "summary")
+
+     
+    
+    render({ :template => "map_templates/coords_weather_results.html.erb"})
+  end
+
+  def gmap
+    render({ :template => "map_templates/map.html.erb"})
+  end
+
+  
 end

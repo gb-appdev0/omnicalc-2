@@ -21,4 +21,9 @@ Rails.application.routes.draw do
   get("/street_to_coords/new", { :controller => "application", :action => "street_coords_form"})
   get("/street_to_coords/results", { :controller => "application", :action => "street_coords_results"})
 
+  get("/coords_to_weather/new", { :controller => "application", :action => "coords_weather_form"})
+  get("/coords_to_weather/results", { :controller => "application", :action => "coords_weather_results"})
+
+  get("/map", { :controller => "application", :action => "gmap"})
+
 end
